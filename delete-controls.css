@@ -1,0 +1,15 @@
+/* Direct deletion next to user-created content */
+.quick-delete{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid transparent;background:transparent;color:#9b4335;padding:8px 9px;font:13px/1.3 var(--ui);white-space:nowrap;cursor:pointer;transition:background .15s,border-color .15s}
+.quick-delete:hover{background:#eed9cb;border-color:#cba99b}
+.quick-delete:focus-visible{outline:3px solid var(--cobalt);outline-offset:2px}
+.quick-delete span{font:20px/1 var(--display)}
+.program-actions .quick-delete,.curriculum-controls .quick-delete,.lecture-actions .quick-delete{margin-left:0}
+.poster .quick-delete{position:relative;z-index:3;margin-top:12px;padding-left:0}
+.delete-wrap{position:relative;min-width:0}
+.delete-wrap .sheet{width:100%;height:100%;padding-bottom:66px}
+.delete-wrap .quick-delete{position:absolute;right:17px;bottom:10px;z-index:4}
+.delete-wrap:nth-child(3n+2) .sheet{transform:rotate(1.4deg);background:#e1e6da}
+.delete-wrap:nth-child(3n) .sheet{transform:rotate(-.35deg);background:#e8d8b7}
+.delete-wrap .sheet:hover{transform:rotate(0deg) translateY(-5px)}
+.delete-wrap.is-complete{opacity:.55}
+@media(max-width:760px){.program-actions .quick-delete,.curriculum-controls .quick-delete,.lecture-actions .quick-delete{min-height:37px}.quick-delete{font-size:12px}}
