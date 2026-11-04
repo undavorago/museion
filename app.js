@@ -2,20 +2,8 @@
 (()=>{'use strict';
 const KEY='museion.v2:',OLD='museion-library-v1',MIGRATE='museion.v2.migrated';
 const TYPE={program:'Программа',course:'Курс',lesson:'Занятие',note:'Конспект',question:'Вопрос',task:'Домашняя работа'};
-const LEGACY_PROGRAM={id:'00000000-0000-4000-8000-00000000a001',type:'program',title:'Древнегреческая мифология',description:'Первая программа: от мифологического мышления к эпосу и трагедии.',order:1,updatedAt:1,deleted:false};
-const LEGACY_COURSES=[
-{id:'00000000-0000-4000-8000-00000000c001',type:'course',title:'Мифология Древней Греции',author:'ПостНаука · Гасан Гусейнов',url:'https://postnauka.org/courses/46312',description:'11 лекций о мифологическом мышлении, пространстве, времени, Эросе, Аполлоне и Дионисе.',programId:LEGACY_PROGRAM.id,order:1,updatedAt:1,deleted:false},
-{id:'00000000-0000-4000-8000-00000000c002',type:'course',title:'Эпохи мировой литературы и культуры',author:'МГУ · Оксана Седых',url:'https://teach-in.ru/course/epochs-of-world-literature-and-culture',description:'Занятия 17–20: Гомер, эпос и древнегреческая трагедия.',programId:LEGACY_PROGRAM.id,order:2,updatedAt:1,deleted:false}
-];
-const OLD_COURSE_IDS={postnauka:LEGACY_COURSES[0].id,msu:LEGACY_COURSES[1].id};
-const lessons=[
-['00000000-0000-4000-8000-000000000001','Основы мифологии','postnauka',1,'Лекции 1–6: исследование мифов, периодизация, логика мифа, язык, пространство и душа.'],
-['00000000-0000-4000-8000-000000000002','Как миф объясняет мир','postnauka',2,'Лекции 7–11: время, общество, архитектура, Эрот, Аполлон и Дионис.'],
-['00000000-0000-4000-8000-000000000003','Гомеровский эпос · I','msu',3,'Лекция 17: знакомство с «Илиадой» и «Одиссеей».'],
-['00000000-0000-4000-8000-000000000004','Гомеровский эпос · II','msu',4,'Лекция 18: продолжение разговора о Гомере.'],
-['00000000-0000-4000-8000-000000000005','Древнегреческая трагедия','msu',5,'Лекция 19: устройство и становление греческой трагедии.'],
-['00000000-0000-4000-8000-000000000006','Софокл и Еврипид','msu',6,'Лекция 20: драматургия античных трагиков.']
-].map(([id,title,courseId,week,description])=>({id,type:'lesson',title,courseId:OLD_COURSE_IDS[courseId],week,order:week,description,url:'',duration:'',status:'todo',updatedAt:1,deleted:false}));
+// Old course IDs retained only for reading previously saved records, never inserted into a new account.
+const OLD_COURSE_IDS={postnauka:'00000000-0000-4000-8000-00000000c001',msu:'00000000-0000-4000-8000-00000000c002'};
 const app=document.querySelector('#app');let items=[],view='home',editing=null,filterText='',filterCourse='',cloud=null,session=null,userId=null,cloudConfig={url:'',key:''},cloudError='',syncState='local',syncTimer=null,syncBusy=false,syncQueued=false,editorRange=null,authReady=false,authMode='in',authNotice='',collapsedPrograms=new Set(),collapsedCourses=new Set();
 const ic={home:'<path d="M3 10 12 3l9 7v11H3Z"/><path d="M9 21v-8h6v8"/>',books:'<path d="M3 4h5v17H3zM9 6h5v15H9zM15 3h5v18h-5z"/>',pen:'<path d="m3 21 5-1 12-12-4-4L4 16zM14 6l4 4"/>',question:'<circle cx="12" cy="12" r="9"/><path d="M9.3 9a3 3 0 1 1 5.5 2c-1 1.3-2.8 1.4-2.8 3.6M12 18h.01"/>',task:'<path d="M7 3h10v3H7zM6 5H4v16h16V5h-2M8 12l2 2 5-5M8 18h8"/>',user:'<circle cx="12" cy="7" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/>',plus:'<path d="M12 5v14M5 12h14"/>',arrow:'<path d="M4 12h16m-7-7 7 7-7 7"/>',check:'<path d="m4 12 5 5L20 6"/>',cloud:'<path d="M20 18a4 4 0 0 0-2-7.5A7 7 0 0 0 4.9 12 3 3 0 0 0 5 18Z"/>',search:'<circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/>',export:'<path d="M12 3v12m-4-4 4 4 4-4M5 17v4h14v-4"/>',import:'<path d="M12 21V9m-4 4 4-4 4 4M5 7V3h14v4"/>',back:'<path d="m15 18-6-6 6-6"/>',trash:'<path d="M3 6h18M8 6V4h8v2M6 6l1 15h10l1-15M10 10v7m4-7v7"/>',external:'<path d="M13 4h7v7m0-7-10 10M19 14v6H4V5h7"/>',menu:'<path d="M3 6h18M3 12h18M3 18h18"/>',wifi:'<path d="M2 8q10-9 20 0M5 12q7-6 14 0M9 16q3-3 6 0M12 20h.01"/>'};
 const svg=(name,size=17)=>`<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ic[name]||ic.pen}</svg>`;
