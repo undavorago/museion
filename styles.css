@@ -102,3 +102,8 @@
  .gate-paper{padding:36px 26px 30px}
  .gate-paper h1{font-size:60px}
 }
+
+/* Finished content: visible but recedes behind current studies */
+.poster.is-complete,.sheet.is-complete{opacity:.5;transition:opacity .2s}
+.poster.is-complete:hover,.sheet.is-complete:hover{opacity:.82}
+.poster.is-complete h3,.sheet.is-complete h3{text-decoration:line-through;text-decoration-thickness:1px}
