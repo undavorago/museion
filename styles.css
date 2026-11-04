@@ -38,3 +38,67 @@
 .lecture-actions{flex-wrap:wrap;min-width:0}
 @media(max-width:760px){.lecture-actions{justify-content:flex-start;gap:8px}.lecture-actions .order-controls{flex-basis:100%;margin-left:0}.lecture-row{min-width:0}.lecture-row>div{min-width:0}.program-ribbon h2{overflow-wrap:break-word;hyphens:auto}}
 @media(max-width:420px){.lecture-actions .btn,.lecture-actions .status-b{font-size:12px;padding:9px 7px}.program-ribbon h2{font-size:40px}.curriculum-start .btn{font-size:13px}}
+
+/* v4 · private entrance and foldable curricula */
+[hidden]{display:none!important}
+.topbar{justify-content:flex-end;gap:22px;min-height:70px}
+.topnav{margin-left:auto}
+.account-pill{max-width:48vw;overflow:hidden;text-overflow:ellipsis}
+.main{padding-top:36px}
+.stage-olive,.auth-art .olive-img{display:none!important}
+.fold-heading{display:flex;align-items:flex-start;gap:18px;min-width:0}
+.fold-title{min-width:0;flex:1}
+.fold-button{flex:0 0 38px;width:38px;height:38px;display:grid;place-items:center;border:1px solid #a29373;background:#faf5e7;color:var(--ink);box-shadow:3px 3px 0 #1d241d20;font:31px/1 var(--display);transition:background .2s,transform .2s}
+.fold-button:hover{background:#e0d0a9;transform:rotate(-3deg)}
+.fold-button:focus-visible{outline-offset:3px}
+.fold-program{margin-top:15px}
+.program-ribbon .fold-title h2,.course-intro .fold-title h2{max-width:none;overflow-wrap:anywhere}
+.course-intro .number{position:static;display:inline-block;margin-right:14px;vertical-align:middle;font-size:28px}
+.course-intro .marker{display:inline-block;vertical-align:middle}
+.program-group{margin-bottom:34px}
+.program-body{display:grid;gap:24px}
+.course-body{display:block}
+.lecture-row.is-complete{opacity:.47;transition:opacity .2s}
+.lecture-row.is-complete:hover{opacity:.85}
+.lecture-row.is-complete h3{text-decoration:line-through;text-decoration-thickness:1px;text-decoration-color:#857662}
+.lectures-list.is-complete .course-intro{opacity:.64}
+.lectures-list.is-complete .course-intro h2{text-decoration:line-through;text-decoration-thickness:1px}
+.program-group.is-complete .program-ribbon{opacity:.68}
+.program-group.is-complete .program-ribbon h2{text-decoration:line-through;text-decoration-thickness:1px}
+.empty-curriculum{max-width:720px}
+.gate{position:relative;min-height:100vh;display:grid;place-items:center;overflow:hidden;padding:clamp(35px,5vw,65px) 22px;background:#eee9d8;isolation:isolate}
+.gate::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 45% 29%,#fff9e5 0,transparent 47%),repeating-linear-gradient(0deg,transparent 0 32px,#846b4308 33px);z-index:-2}
+.gate-backdrop{position:absolute;inset:0;pointer-events:none;z-index:-1;overflow:hidden}
+.gate-column{position:absolute;left:max(-60px,calc(50% - 620px));bottom:-17%;width:clamp(170px,26vw,365px);max-height:94%;object-fit:contain;transform:rotate(-9deg);opacity:.28;filter:grayscale(.6)}
+.gate-amphora{position:absolute;right:max(-40px,calc(50% - 605px));bottom:1%;width:clamp(155px,22vw,295px);max-height:50%;object-fit:contain;transform:rotate(9deg);opacity:.47}
+.gate-paper{position:relative;z-index:1;background:#fbf8ed;width:min(100%,440px);border:1px solid #b6a484;padding:45px clamp(25px,5vw,49px) 40px;box-shadow:8px 11px 0 #3428171e,0 21px 45px #34281713;transform:rotate(-.45deg)}
+.gate-paper::before{content:"";position:absolute;top:-12px;left:37%;width:96px;height:23px;background:#d2b9879e;transform:rotate(5deg)}
+.gate-accent{height:3px;background:linear-gradient(90deg,#aa4932 0 35%,#e7d8bc 35% 100%);margin-bottom:26px}
+.gate-paper h1{font:normal clamp(58px,9vw,74px)/1 var(--display);letter-spacing:-.015em;margin:0 0 30px;color:#30362b}
+.gate-form{display:grid;gap:20px}
+.gate-form label{display:flex;flex-direction:column;gap:7px;font:13px var(--ui);color:#514c43}
+.gate-form .input{width:100%;background:#fffdf6;border:1px solid #b3a991;border-radius:0;padding:12px 13px;font:16px var(--body);min-height:48px}
+.gate-submit{width:100%;margin-top:6px;min-height:47px;font:16px var(--ui)}
+.gate-switch{margin-top:27px;display:flex;align-items:center;flex-wrap:wrap;gap:6px 9px;color:#645a4b;font:13px var(--ui)}
+.gate-switch button{padding:4px 0;border:0;border-bottom:1px solid #a44733;background:none;color:#a44733;font:inherit}
+.gate-alert,.gate-info{padding:11px 13px;background:#f6e5d3;border-left:3px solid #a44733;font:13px/1.6 var(--ui);margin:0 0 18px;overflow-wrap:anywhere}
+.gate-info{background:#e9eddf;border-color:#40584e}
+.gate-loading{font:16px var(--ui);text-align:center;color:#6c6457}
+.account-content{max-width:800px;margin:20px auto}
+.account-card{background:#fbf8ec;border:1px solid #bcb09b;padding:28px;margin-bottom:20px}
+.account-email{font:22px var(--body);overflow-wrap:anywhere;margin:0 0 12px}
+.account-content .settings-card{max-width:none}
+.account-content .settings-card h2{font:38px var(--display);margin:0 0 20px}
+@media(max-width:760px){
+ .topbar{padding:12px 15px;justify-content:flex-end;min-height:62px}
+ .topnav{display:none}
+ .account-pill{max-width:90vw}
+ .main{padding-top:28px}
+ .program-ribbon .fold-heading,.course-intro .fold-heading{gap:10px}
+ .fold-button{width:34px;height:34px;flex-basis:34px}
+ .gate{padding:25px 18px;min-height:100dvh}
+ .gate-column{left:-105px;bottom:-7%;opacity:.18}
+ .gate-amphora{right:-80px;bottom:0;opacity:.23}
+ .gate-paper{padding:36px 26px 30px}
+ .gate-paper h1{font-size:60px}
+}
